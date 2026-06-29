@@ -81,7 +81,13 @@ def main():
     results_df = pd.DataFrame(results)
     results_df.to_csv(OUTPUT_DIR / "model_metrics.csv", index=False)
 
-    ConfusionMatrixDisplay.from_predictions(y_test, best_preds)
+    ConfusionMatrixDisplay.from_predictions(
+    y_test,
+    best_preds,
+    display_labels=["Non-uphill (0)", "Uphill (1)"],
+    values_format="d"
+    )
+    
     plt.title(f"Confusion Matrix: {best_name}")
     plt.tight_layout()
     plt.savefig(FIGURE_DIR / "confusion_matrix.png", dpi=200)
